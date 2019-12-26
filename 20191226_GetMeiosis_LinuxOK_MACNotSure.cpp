@@ -905,6 +905,7 @@ int main()
 
 	NPBtree(npPlatenumLabel);
 	
+	cout<<"Finish running with GateMeiosis!"<<endl;
 	//delete temporary files
 	remove("tmp_PlateOrder.txt");
 	if(namePromoter=="")
