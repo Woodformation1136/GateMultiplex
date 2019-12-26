@@ -1,6 +1,6 @@
 # GateMeiosis
 
-### Installation
+## Installation
 
 **For Windows**
 
