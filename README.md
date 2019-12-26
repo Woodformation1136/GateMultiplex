@@ -19,6 +19,6 @@ g++ GateMeiosis.cpp -o GateMeiosis
 
 
 
-## Run
+## Usage
 
 ./GateMeiosis
