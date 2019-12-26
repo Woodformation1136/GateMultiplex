@@ -1,5 +1,7 @@
 # GateMeiosis
 
+## Requirements
+
 ## Installation
 
 **For Windows**
@@ -17,6 +19,6 @@ g++ GateMeiosis.cpp -o GateMeiosis
 
 
 
-Run
+## Run
 
 ./GateMeiosis
