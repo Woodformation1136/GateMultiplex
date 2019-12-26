@@ -1,7 +1,7 @@
 # GateMeiosis
 
-For Windows
+***For Windows
 
-For macOS
+***For macOS
 
-For Linux
+***For Linux
