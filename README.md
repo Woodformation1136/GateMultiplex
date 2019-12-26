@@ -1,7 +1,14 @@
 # GateMeiosis
 
-***For Windows
+Installation
 
-***For macOS
+**For Windows**
 
-***For Linux
+
+
+**For macOS**
+g++ GateMeiosis.cpp -o GateMeiosis
+
+
+**For Linux**
+g++ GateMeiosis.cpp -o GateMeiosis
