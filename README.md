@@ -6,7 +6,7 @@
 
 **For Windows**
 
-Download Z
+Download Zip
 
 
 
