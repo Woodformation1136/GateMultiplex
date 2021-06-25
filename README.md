@@ -1,4 +1,4 @@
-# GateMeiosis
+# GateMultiplex
 
 ## Requirements
 
