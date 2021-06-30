@@ -389,8 +389,8 @@ def Reference_setting():
 				elif is_number(top_entry.get()) == 1 and is_number(bottom_entry.get()) == 1:
 					if float(top_entry.get()) > 100 or float(top_entry.get()) < 0 or float(bottom_entry.get()) > 100 or float(bottom_entry.get()) < 0:
 						warning_message = warning_message + 'Percentages of bottom and top bound should both be between 0 and 100.\n\n'
-					elif float(top_entry.get()) < float(bottom_entry.get()):
-						warning_message = warning_message + 'Percentage of bottom bound cannot be higher than percentage of top bound.\n\n'
+						if float(top_entry.get()) < float(bottom_entry.get()):
+							warning_message = warning_message + 'Percentage of bottom bound cannot be higher than percentage of top bound.\n\n'
 				if warning_switch == 1 or warning_message != '':
 					if warning_switch == 1:
 						warning_message = 'Please fill at least one SampleName condition.\n\n' + warning_message
@@ -489,30 +489,17 @@ def Reference_setting():
 			def Reference_percentile_setting_selection():
 				global if_no_Toplevel
 				Reference_reset()
-				warning_message = ''
-				percentile_reference = extra_buffer_entry.get()
-				FCvalue_reference = FCvalue_entry.get()
-				if percentile_reference == '':
-					percentile_reference = '50'
-				if FCvalue_reference == '':
-					FCvalue_reference = '1'
-				# if extra_buffer_entry.get() == '' and FCvalue_entry.get() == '':
-				# 	foldChangeHL.clear()
-				# 	foldChangeHL.append(str(HL_btn.get()))
-				# 	foldChangeValue.append('1')
-				# 	reference_percentile.append('50')
-				# 	reference_mode_label.config(text='Percentile of reference group is '+ str(reference_percentile[0]) + '%\n' + 'Fold change value is 1\n' + foldChangeHL[0])
-				# 	extra_window.destroy()
-				# 	if_no_Toplevel = True
-				# 	return
-				if is_number(percentile_reference) == 0 or float(percentile_reference) > 100 or float(percentile_reference) < 0:
-					warning_message = warning_message + 'Reference percentile should be a numeric value between 0 and 100.\n\n'
-				if is_number(FCvalue_reference) == 0:
-					warning_message = warning_message + 'Fold change value should be a numeric value.\n\n'
-				if warning_message != '':
+				if extra_buffer_entry.get() == '':
+					foldChangeHL.clear()
+					foldChangeHL.append(str(HL_btn.get()))
+					reference_percentile.append('50')
+					reference_mode_label.config(text='Percentile of reference group is '+ str(reference_percentile[0]) + '%\n' + foldChangeHL[0])
+					extra_window.destroy()
+					if_no_Toplevel = True
+				elif is_number(extra_buffer_entry.get()) == 0 or float(extra_buffer_entry.get()) > 100 or float(extra_buffer_entry.get()) < 0:
 					warning_window = tk.Toplevel()
 					warning_window.title('Warning')
-					warning_label = tk.Label(warning_window, text=warning_message, relief = SUNKEN)
+					warning_label = tk.Label(warning_window, text='Reference percentile should be a numeric value between 0 and 100.', relief = SUNKEN)
 					warning_window.wm_attributes('-topmost',1)
 					warning_label.pack()
 					def close_warning():
@@ -522,10 +509,10 @@ def Reference_setting():
 					warning_window.mainloop
 				else:
 					foldChangeValue.clear()
-					foldChangeValue.append(str(FCvalue_reference))
+					foldChangeValue.append(str(FCvalue_entry.get()))
 					foldChangeHL.clear()
 					foldChangeHL.append(str(HL_btn.get()))
-					reference_percentile.append(percentile_reference)
+					reference_percentile.append(extra_buffer_entry.get())
 					reference_mode_label.config(text='Percentile of reference group is '+ str(reference_percentile[0]) + '%\nFold change value: ' + foldChangeValue[0] + '\n' + foldChangeHL[0])
 					extra_window.destroy()
 					if_no_Toplevel = True
@@ -567,7 +554,7 @@ def Reference_setting():
 					warning_window = tk.Toplevel()
 					warning_window.title('Warning')
 					warning_window.wm_attributes('-topmost',1)
-					warning_label = tk.Label(warning_window, text='Fixed reference values should be numeric values.', relief = SUNKEN)
+					warning_label = tk.Label(warning_window, text='Fixed reference value should be numeric values.', relief = SUNKEN)
 					warning_label.pack()
 					def close_warning():
 						warning_window.destroy()
@@ -722,7 +709,7 @@ def Parametercutoff_setting():
 						# text_parameter_title_label = text_parameter_title_label + 'Signal_type' + ', '
 						# text_parameter_cutoff_label = text_parameter_cutoff_label + parametercutoff_list[i] + ', '
 				# parameter_col_label.config(text=text_parameter_title_label[0:-2] + '\n' + text_parameter_cutoff_label[0:-2])
-				parameter_col_label.config(text=text_PC[0:-1])
+				parameter_col_label.config(text=text_PC[0:-2])
 		row_count=0
 		for title in Parametercutoff_option_list:
 			if title != 'Signal_type':

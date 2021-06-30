@@ -375,8 +375,6 @@ def Reference_setting():
 				if label.get() != '':
 					warning_switch = 0
 				reference_label_list.append(label.get())
-			if warning_switch == 1:
-				warning_message = warning_message + 'Please fill at least one SampleName condition.\n\n'
 			if is_number(str((buffer_entry.get()))) == 0 and buffer_entry.get() != '':
 				warning_message = warning_message + 'Fold change value should be a numeric value.\n\n'
 			if (is_number(top_entry.get()) == 0 and top_entry.get() != '') or (is_number(bottom_entry.get()) == 0 and bottom_entry.get() != ''):
@@ -384,12 +382,12 @@ def Reference_setting():
 			elif is_number(top_entry.get()) == 1 and is_number(bottom_entry.get()) == 1:
 				if float(top_entry.get()) > 100 or float(top_entry.get()) < 0 or float(bottom_entry.get()) > 100 or float(bottom_entry.get()) < 0:
 					warning_message = warning_message + 'Percentages of bottom and top bound should both be between 0 and 100.\n\n'
-				elif float(top_entry.get()) < float(bottom_entry.get()):
-					warning_message = warning_message + 'Percentage of bottom bound cannot be higher than percentage of top bound.\n\n'
+					if float(top_entry.get()) < float(bottom_entry.get()):
+						warning_message = warning_message + 'Percentage of bottom bound cannot be higher than percentage of top bound.\n\n'
 			if warning_switch == 1 or warning_message != '':
 				warning_window = tk.Toplevel()
 				warning_window.title('Warning')
-				warning_label = tk.Label(warning_window, text=warning_message, relief = SUNKEN)
+				warning_label = tk.Label(warning_window, text='Please fill at least one SampleName condition.', relief = SUNKEN)
 				warning_window.wm_attributes('-topmost',1)
 				warning_label.pack()
 				def close_warning():
@@ -749,7 +747,7 @@ def Parameters_setting():
 		if len(signal_list) == 0:
 			warning_list = warning_list + 'Please set Signal column.\n\n'
 		if len(reference_label_list) == 0 and len(fixed_reference_list) == 0 and len(reference_percentile) == 0:
-			warning_list = warning_list + 'Please set Reference cutoff.\n\n'
+			warning_list = warning_list + 'Please set Reference group.\n\n'
 	#	 for i in range(0,2):
 	#			 if frame_entry_list[i].get() != '':
 	#				 if is_number(frame_entry_list[i].get()) == 0:
